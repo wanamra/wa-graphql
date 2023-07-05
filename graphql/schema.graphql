@@ -26,6 +26,24 @@ type Query {
     ): [Post!]! @paginate(defaultCount: 10)
 }
 
+type Mutation {
+    createPost(
+        user_id: ID!
+        title: String! @rules(apply: ["required"])
+        body: String! @rules(apply: ["required"])
+    ) : Post @create
+
+    updatePost(
+        id: ID!
+        title: String! @rules(apply: ["required"])
+        body: String! @rules(apply: ["required"])
+    ) : Post @update
+
+    deletePost(
+        id: ID!
+    ) : Post @delete
+}
+
 "Account of a person who utilizes this application."
 type User {
     "Unique primary key."
